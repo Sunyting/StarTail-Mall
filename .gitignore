@@ -1,0 +1,18 @@
+# HBuilderX 相关
+.hbuilderx/
+unpackage/
+*.dSYM/
+
+# 依赖文件
+node_modules/
+dist/
+build/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+*.log
+
+# 环境配置文件
+.env
+.env.local
