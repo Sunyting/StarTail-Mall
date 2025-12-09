@@ -1,0 +1,29 @@
+{
+  "semi": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "bracketSpacing": true,
+  "printWidth": 120,
+  "vueIndentScriptAndStyle": true,
+  "endOfLine": "lf",
+  
+  // 针对 import 的特殊处理
+  "importOrder": ["^vue", "^@", "^[./]"],
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": true,
+  
+  // 禁止自动换行
+  "proseWrap": "never",
+  
+  "overrides": [
+    {
+      "files": ["*.js", "*.vue"],
+      "options": {
+        "proseWrap": "never"
+      }
+    }
+  ]
+}
+}

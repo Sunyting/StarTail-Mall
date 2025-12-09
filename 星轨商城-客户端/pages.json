@@ -8,26 +8,23 @@
 			}
 		},
 		{
-			"path" : "pages/my/my",
-			"style" : 
-			{
-				"navigationBarTitleText" : "我的",
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "我的",
 				"navigationStyle": "custom"
 			}
 		},
 		{
-			"path" : "pages/news/news",
-			"style" : 
-			{
-				"navigationBarTitleText" : "资讯",
+			"path": "pages/news/news",
+			"style": {
+				"navigationBarTitleText": "资讯",
 				"navigationStyle": "custom"
 			}
 		},
 		{
-			"path" : "pages/shop/category",
-			"style" : 
-			{
-				"navigationBarTitleText" : "分类",
+			"path": "pages/shop/category",
+			"style": {
+				"navigationBarTitleText": "分类",
 				"navigationStyle": "custom"
 			}
 		}
@@ -39,8 +36,7 @@
 		"backgroundColor": "#ffffff",
 		"fontSize": "16px",
 		"height": "60px",
-		"list": [
-			{
+		"list": [{
 				"text": "主页",
 				"pagePath": "pages/index/index",
 				"iconPath": "static/tabbar-icon/首页.png",
@@ -49,7 +45,7 @@
 			{
 				"text": "商城",
 				"pagePath": "pages/shop/category",
-				"iconPath":"static/tabbar-icon/商城.png",
+				"iconPath": "static/tabbar-icon/商城.png",
 				"selectedIconPath": "static/tabbar-icon/select商城.png"
 			},
 			{
