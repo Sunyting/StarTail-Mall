@@ -3,10 +3,69 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "星轨商城",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/my/my",
+			"style" : 
+			{
+				"navigationBarTitleText" : "我的",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/news/news",
+			"style" : 
+			{
+				"navigationBarTitleText" : "资讯",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/shop/category",
+			"style" : 
+			{
+				"navigationBarTitleText" : "分类",
+				"navigationStyle": "custom"
 			}
 		}
 	],
+	"tabBar": {
+		"color": "#000000",
+		"selectedColor": "#ee6ca0",
+		"position": "bottom",
+		"backgroundColor": "#ffffff",
+		"fontSize": "16px",
+		"height": "60px",
+		"list": [
+			{
+				"text": "主页",
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbar-icon/首页.png",
+				"selectedIconPath": "static/tabbar-icon/select首页.png"
+			},
+			{
+				"text": "商城",
+				"pagePath": "pages/shop/category",
+				"iconPath":"static/tabbar-icon/商城.png",
+				"selectedIconPath": "static/tabbar-icon/select商城.png"
+			},
+			{
+				"text": "资讯",
+				"pagePath": "pages/news/news",
+				"iconPath": "static/tabbar-icon/新品.png",
+				"selectedIconPath": "static/tabbar-icon/select新品.png"
+			},
+			{
+				"text": "我的",
+				"pagePath": "pages/my/my",
+				"iconPath": "static/tabbar-icon/我的.png",
+				"selectedIconPath": "static/tabbar-icon/select我的.png"
+			}
+		]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
