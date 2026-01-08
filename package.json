@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "prettier": "^3.7.4"
+  },
+  "dependencies": {
+    "@dcloudio/uni-ui": "^1.5.11"
   }
 }

@@ -1,7 +1,19 @@
 <script setup>
 import { COLOR_PRIMARY, WINDOW_INFO } from '../../utils/config.js';
 import { statusBarH, useNavBarStyle } from '../../utils/system.js';
-import { computed } from 'vue';
+import { computed, defineProps } from 'vue';
+
+// 父传子参数
+const props = defineProps({
+	flag: {
+		type: Boolean,
+		default: false
+	},
+	title: {
+		type: String,
+		default: ''
+	}
+});
 
 // 状态栏高度样式
 const { statusBarHeight } = useNavBarStyle();
@@ -17,14 +29,6 @@ const navBarStyle = computed(() => {
 
 const screenTop = computed(() => {
 	return WINDOW_INFO.screenTop;
-});
-
-// 父传子
-const props = defineProps({
-	title: {
-		type: String,
-		default: ''
-	}
 });
 
 // 判断是否显示返回按钮：检查页面栈是否有上一页
@@ -47,15 +51,12 @@ const navBack = () => {
 // H5 平台返回逻辑
 const handleH5Back = () => {
 	console.log('H5 平台返回逻辑');
-
 	// 方法1：使用浏览器历史
 	if (window.history && window.history.length > 1) {
 		window.history.back();
 	} else {
 		// 没有历史记录，跳转到首页
 		window.location.href = '/';
-		// 或者使用 uniapp 的跳转（如果配置了路由）
-		// uni.reLaunch({ url: '/pages/index/index' });
 	}
 };
 
@@ -103,9 +104,10 @@ const jumpToHome = () => {
 	// #endif
 };
 </script>
+
 <template>
 	<view class="nav-bar">
-		<view class="fix" :style="navBarStyle">
+		<view class="fix" :style="[navBarStyle, flag ? { height: '212rpx' } : {}]">
 			<view class="status"></view>
 			<view class="title">
 				<view class="left" v-if="showBack" @click.stop="navBack">
@@ -122,15 +124,17 @@ const jumpToHome = () => {
 <style lang="scss" scoped>
 .nav-bar {
 	width: 100vw;
+	z-index: 999;
 	.fix {
 		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
+		/* 默认高度样式放到 CSS 中 */
 		background: url('../static/QQ图片20251027171218.jpg') 0rpx -210rpx no-repeat;
 		background-size: cover;
 		.status {
-			font-size: 18px;
+			font-size: 18rpx;
 			width: 100%;
 			height: v-bind(statusBarHeight);
 		}
