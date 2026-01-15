@@ -24,7 +24,7 @@
 			width: 100%;
 
 			.item-image {
-				width: 710rpx;
+				width: 100%;
 				height: 380rpx;
 				border-radius: 20rpx;
 				background-size: cover;

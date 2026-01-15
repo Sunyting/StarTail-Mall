@@ -55,7 +55,7 @@ const shopList = ref([
 
 <template>
 	<view class="shop">
-		<view class="image"></view>
+		<view class="image" style="background-image: url(/static/index/shop/1/big.png)"></view>
 		<scroll-view class="scroll-content" scroll-x="true" :show-scrollbar="false">
 			<view class="commodity-scroll-container">
 				<Commodity :dataList="shopList" :itemwidth="250" flexWrap="nowrap" />
@@ -71,7 +71,7 @@ const shopList = ref([
 	.image {
 		width: 100%;
 		height: 350rpx;
-		background-image: url(@/static/index/shop/1/big.png);
+		// background-image: url(@/static/index/shop/1/big.png);
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: contain;
