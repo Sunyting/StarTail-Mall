@@ -56,7 +56,7 @@ const shopList = ref([
 <template>
 	<view class="shop">
 		<view class="image"></view>
-		<scroll-view class="scroll-content" scroll-x="true">
+		<scroll-view class="scroll-content" scroll-x="true" :show-scrollbar="false">
 			<view class="commodity-scroll-container">
 				<Commodity :dataList="shopList" :itemwidth="250" flexWrap="nowrap" />
 			</view>

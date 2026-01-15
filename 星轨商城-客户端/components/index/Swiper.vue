@@ -13,7 +13,7 @@
 <style lang="scss" scoped>
 .banner {
 	width: 100%;
-	position: relative; // 确保层级在固定元素下方
+	position: relative;
 	z-index: 1;
 
 	.swiper {
