@@ -4,8 +4,12 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "星轨商城",
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"app-plus": {
+					"scrollIndicator": "none"
+				}
 			}
+
 		},
 		{
 			"path": "pages/my/my",
@@ -15,9 +19,9 @@
 			}
 		},
 		{
-			"path": "pages/news/news",
+			"path": "pages/car/car",
 			"style": {
-				"navigationBarTitleText": "资讯",
+				"navigationBarTitleText": "购物车",
 				"navigationStyle": "custom"
 			}
 		},
@@ -34,7 +38,7 @@
 		"selectedColor": "#ee6ca0",
 		"position": "bottom",
 		"backgroundColor": "#ffffff",
-		"fontSize": "16px",
+		"fontSize": "15px",
 		"height": "60px",
 		"list": [{
 				"text": "主页",
@@ -49,10 +53,10 @@
 				"selectedIconPath": "static/tabbar-icon/select商城.png"
 			},
 			{
-				"text": "资讯",
-				"pagePath": "pages/news/news",
-				"iconPath": "static/tabbar-icon/新品.png",
-				"selectedIconPath": "static/tabbar-icon/select新品.png"
+				"text": "购物车",
+				"pagePath": "pages/car/car",
+				"iconPath": "static/tabbar-icon/购物车.png",
+				"selectedIconPath": "static/tabbar-icon/select购物车.png"
 			},
 			{
 				"text": "我的",
@@ -66,7 +70,10 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"scrollIndicator": "none" // 去除滚动条
+		},
 	},
 	"uniIdRouter": {},
 	"easycom": {

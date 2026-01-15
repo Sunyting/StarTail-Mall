@@ -2,7 +2,7 @@
 
 <template>
 	<view class="page-wrap">
-		<mobile-nav-bar title="资讯"></mobile-nav-bar>
+		<mobile-nav-bar title="购物车"></mobile-nav-bar>
 	</view>
 </template>
 
