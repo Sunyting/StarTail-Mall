@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 const handleBuy = () => {
 	// 方式1：跳转到tabBar页面（如my是tabBar页面）
 	uni.switchTab({
@@ -10,28 +11,23 @@ const handleBuy = () => {
 	// 	url: '/pages/my/my'
 	// });
 };
-
 const props = defineProps({
-	productId: {
-		type: Number,
-		required: true
-	}
+	recommendData: Object
 });
-console.log(props.productId);
 </script>
 
 <template>
 	<view class="page-content">
 		<view class="recommend-item">
-			<image class="item-big" :src="`/static/index/recommend/${props.productId}/big.png`" mode="widthfill"></image>
+			<image class="item-big" :src="`${props.recommendData.bigImgUrl}`" mode="widthfill"></image>
 			<view class="product">
-				<view class="product-item" v-for="i in 4" :key="i">
-					<view class="item-img" :style="{ backgroundImage: `url(/static/index/recommend/${props.productId}/${i}.png)` }" mode="widthFill"></view>
-					<view class="item-name">拂晓长誓系列戒指</view>
+				<view class="product-item" v-for="(item, index) in props.recommendData.List" :key="index">
+					<view class="item-img" :style="{ backgroundImage: `url(${item.imgUrl})` }" mode="widthFill"></view>
+					<view class="item-name">{{ item.name }}</view>
 					<view class="item-footer">
 						<view class="left">
 							￥
-							<p class="sale">123</p>
+							<p class="sale">{{ item.price }}</p>
 							/件
 						</view>
 						<view class="right" @click="handleBuy"></view>

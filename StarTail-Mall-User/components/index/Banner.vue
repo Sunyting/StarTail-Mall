@@ -1,8 +1,14 @@
-<script setup></script>
+<script setup>
+const props = defineProps({
+	bannerImgUrl: {
+		type: String
+	}
+});
+</script>
 
 <template>
 	<view class="banner">
-		<image class="img" src="@/static/index/banner/首饰珠宝.png" alt="" mode="aspectFill" />
+		<image class="img" :src="`${props.bannerImgUrl}`" alt="" mode="aspectFill" />
 	</view>
 </template>
 

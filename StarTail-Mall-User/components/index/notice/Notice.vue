@@ -1,22 +1,16 @@
+<script setup>
+import { ref } from 'vue';
+const props = defineProps({
+	noticeData: Array
+});
+</script>
 <template>
 	<view class="notice">
 		<view class="notice-left"></view>
 		<view class="notice-content">
 			<swiper class="swiper" vertical autoplay :interval="3000" :duration="1000" circular :disable-touch="true">
-				<swiper-item class="swiper-item">
-					<view class="item-text">测试内容11111111111111111111111111</view>
-				</swiper-item>
-				<swiper-item class="swiper-item">
-					<view class="item-text">测试内容22222222222221111111111111</view>
-				</swiper-item>
-				<swiper-item class="swiper-item">
-					<view class="item-text">测试内容33333333333331111111111111</view>
-				</swiper-item>
-				<swiper-item class="swiper-item">
-					<view class="item-text">测试内容44444444444441111111111111</view>
-				</swiper-item>
-				<swiper-item class="swiper-item">
-					<view class="item-text">测试内容55555555555551111111111111</view>
+				<swiper-item class="swiper-item" v-for="(item, index) in props.noticeData" :key="index">
+					<view class="item-text">{{ item.title }}</view>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -26,8 +20,10 @@
 
 <style lang="scss" scoped>
 .notice {
-	width: 690rpx;
-	height: 50rpx; /* 增加高度以便更好地显示 */
+	width: 96%;
+	padding: 0 20rpx;
+	height: 50rpx;
+	/* 增加高度以便更好地显示 */
 	line-height: 50rpx;
 	padding: 10rpx 10rpx;
 	margin: 10rpx 0rpx;

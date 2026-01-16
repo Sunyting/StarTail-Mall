@@ -1,13 +1,15 @@
 <script setup>
 import { ref } from 'vue';
-const jewelrytitle = ref(['黄金', '吊坠', '耳饰', '手链', '戒指', '项链', '手镯', '转运珠']);
+const props = defineProps({
+	iconList: Array
+});
 </script>
 
 <template>
 	<view class="icon-list">
-		<view class="icon-item" v-for="(title, index) in jewelrytitle" :key="index">
-			<image class="icon-img" :src="`/static/index/icon/首饰珠宝/${index + 1}.png`" mode="aspectFit" />
-			<text class="icon-text">{{ title }}</text>
+		<view class="icon-item" v-for="(item, index) in props.iconList" :key="index">
+			<image class="icon-img" :src="`${item.imgUrl}`" mode="aspectFit" />
+			<text class="icon-text">{{ item.title }}</text>
 		</view>
 	</view>
 </template>

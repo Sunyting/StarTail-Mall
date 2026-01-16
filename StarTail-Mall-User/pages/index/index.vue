@@ -1,52 +1,68 @@
+<!-- pages/index/index.vue -->
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, markRaw } from 'vue';
 import { useNavBarStyle } from '@/utils/system.js';
-import indexSwiper from '@/components/index/Swiper.vue';
-import Recommend from '@/components/index/recommend/Recommend.vue';
-import Notice from '@/components/notice/Notice.vue';
-import Card from '@/components/common/Card.vue';
-import CommodityList from '@/components/common/CommodityList.vue';
-import Banner from '@/components/index/Banner.vue';
-import Icons from '@/components/index/Icons.vue';
-import Hot from '@/components/index/Hot.vue';
-import Shop from '@/components/index/Shop.vue';
+
+// 导入 tab 组件
+import RecommendTab from '@/components/index/tabs/RecommendTab.vue';
+import AnimationeTab from '@/components/index/tabs/AnimationTab.vue';
+import GameTab from '@/components/index/tabs/GameTab.vue';
+import ArtTab from '@/components/index/tabs/ArtTab.vue';
+import PetTab from '@/components/index/tabs/PetTab.vue';
+import JewelryTab from '@/components/index/tabs/JewelryTab.vue';
+import JokeTab from '@/components/index/tabs/JokeTab.vue';
+
 const { statusBarHeight } = useNavBarStyle();
-const flag = computed(() => {
-	// #ifdef H5
-	return true;
-	// #endif
-});
-onMounted(() => {
-	console.log('1' + statusBarHeight);
-});
-const searchValue = ref('');
-const handleSearch = () => {
-	console.log('search');
-};
 
-const weixinFlag = computed(() => {
-	// #ifdef MP-WEIXIN
-	return true;
-	// #endif
-	return false;
-});
-
-// 选中的索引
-const topBarIndex = ref(0);
-//顶栏跟随的索引id值
-const scrollIntoIndex = ref('top1');
-const topBar = ref([{ name: '推荐' }, { name: '游戏动漫' }, { name: '美术画集' }, { name: '次元周边' }, { name: '宠物用品' }, { name: '珠宝首饰' }, { name: '生活调剂' }]);
-// 切换tab
-const changeTab = (index) => {
-	if (topBarIndex.value === index) {
-		return;
+// 顶部 tab 栏配置 - 使用 markRaw 包裹组件
+const topBar = ref([
+	{
+		name: '推荐',
+		component: markRaw(RecommendTab)
+	},
+	{
+		name: '漫画动漫',
+		component: markRaw(AnimationeTab)
+	},
+	{
+		name: '游戏周边',
+		component: markRaw(GameTab)
+	},
+	{
+		name: '美术画集',
+		component: markRaw(ArtTab)
+	},
+	{
+		name: '宠物用品',
+		component: markRaw(PetTab)
+	},
+	{
+		name: '珠宝首饰',
+		component: markRaw(JewelryTab)
+	},
+	{
+		name: '生活调剂',
+		component: markRaw(JokeTab)
 	}
+]);
+
+const topBarIndex = ref(0);
+const scrollIntoIndex = ref('top0');
+
+// 切换 tab
+const changeTab = (index) => {
+	if (topBarIndex.value === index) return;
 	topBarIndex.value = index;
 	scrollIntoIndex.value = 'top' + index;
 };
+
 const onChangeTab = (e) => {
 	changeTab(e.detail.current);
 };
+
+onMounted(() => {
+	console.log('1' + statusBarHeight);
+});
 </script>
 
 <template>
@@ -57,52 +73,17 @@ const onChangeTab = (e) => {
 			<view class="search-placeholder"></view>
 		</view>
 
-		<scroll-view scroll-with-animation="true" scroll-x="true" :show-scrollbar="false" class="scroll-content" :scroll-into-view="scrollIntoIndex">
+		<scroll-view scroll-with-animation="true" scroll-x="true" :show-scrollbar="false" class="scroll-content" :scroll-into-view="scrollIntoIndex" :scroll-left="0">
 			<view :id="'top' + index" class="scroll-item" v-for="(item, index) in topBar" :key="index" @tap="changeTab(index)">
 				<text :class="topBarIndex === index ? 'top-active' : 'top'">{{ item.name }}</text>
 			</view>
 		</scroll-view>
 
-		<swiper @change="onChangeTab" :current="topBarIndex" class="swiper-container">
+		<swiper @change="onChangeTab" :current="topBarIndex" class="swiper-container" :duration="300">
 			<swiper-item v-for="(item, index) in topBar" :key="index">
 				<view class="swiper-item">
-					<!-- 推荐内容 -->
-					<view class="page-scroll" v-if="index === 0">
-						<view class="page-head">
-							<indexSwiper />
-							<Notice />
-						</view>
-						<view class="recommend">
-							<Recommend :productId="1" />
-						</view>
-						<view class="category-list">
-							<Card name="猜你喜欢" />
-							<CommodityList></CommodityList>
-							<Card name="次元周边" />
-							<CommodityList></CommodityList>
-							<Card name="抽象潮玩" />
-							<CommodityList></CommodityList>
-							<Card name="杂货铺" />
-							<CommodityList></CommodityList>
-						</view>
-					</view>
-
-					<!-- 珠宝首饰内容 -->
-					<view class="page-scroll" v-if="index === 5">
-						<Banner />
-						<Icons />
-						<Card name="热销爆品" />
-						<Hot />
-						<Card name="推荐店铺" />
-						<Shop />
-						<Card name="为您推荐" />
-						<CommodityList></CommodityList>
-					</view>
-
-					<!-- 其他tab内容 -->
-					<view class="other-content" v-if="index !== 0 && index !== 5">
-						<text class="content-text">{{ item.name }}内容</text>
-					</view>
+					<!-- 动态组件，根据配置渲染不同的组件 -->
+					<component :is="item.component" v-bind="item.props || {}" v-if="topBarIndex === index" />
 				</view>
 			</swiper-item>
 		</swiper>
@@ -113,6 +94,7 @@ const onChangeTab = (e) => {
 .page-wrap {
 	width: 100%;
 	min-height: 100vh;
+	background: #f8f8f8;
 
 	.fixed-nav {
 		position: fixed;
@@ -135,36 +117,39 @@ const onChangeTab = (e) => {
 	.scroll-content {
 		white-space: nowrap;
 		height: 80rpx;
+		background: #fff;
+		border-bottom: 1rpx solid #f0f0f0;
+		box-sizing: border-box;
+
 		.scroll-item {
 			display: inline-block;
-			padding: 5rpx 20rpx;
+			padding: 0 30rpx;
 			font-size: 30rpx;
 			font-weight: 700;
-			line-height: 60rpx;
+			height: 80rpx;
+			line-height: 80rpx;
+			position: relative;
+
 			.top {
-				color: #777;
+				color: #666;
+				transition: color 0.3s;
 			}
+
 			.top-active {
 				color: #f798c1;
-				border-bottom: 5rpx solid #f798c1;
+				border-bottom: 2px solid;
 			}
 		}
 	}
 
 	.swiper-container {
-		height: calc(100vh - 280rpx); /* 调整高度 */
+		height: calc(100vh - 280rpx);
+		background: #f8f8f8;
+
 		.swiper-item {
 			height: 100%;
 			overflow-y: auto;
-		}
-	}
-
-	.other-content {
-		padding: 40rpx;
-		text-align: center;
-		.content-text {
-			font-size: 32rpx;
-			color: #666;
+			padding-bottom: 100rpx;
 		}
 	}
 }

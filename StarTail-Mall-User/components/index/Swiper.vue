@@ -1,10 +1,26 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
+import { onLoad, onShow } from '@dcloudio/uni-app';
+
+let swiperData = ref();
+const init = () => {
+	uni.request({
+		url: 'http://localhost:3001/api/index_list/recommend',
+		success: (res) => {
+			swiperData.value = res.data.data.swiperData.List;
+		}
+	});
+};
+onLoad(() => {
+	init();
+});
+</script>
 
 <template>
 	<view class="banner">
 		<swiper class="swiper" circular indicator-dots indicator-color="rgba(255,255,255,.5)" indicator-active-color="#f99cb2" autoplay interval="3000">
-			<swiper-item class="swiper-item" v-for="i in 5" :key="i">
-				<view class="item-image" :style="{ backgroundImage: `url(/static/banner/${i}.png)` }"></view>
+			<swiper-item class="swiper-item" v-for="(item, index) in swiperData" :key="index">
+				<view class="item-image" :style="{ backgroundImage: `url(${item.imgUrl})` }"></view>
 			</swiper-item>
 		</swiper>
 	</view>
