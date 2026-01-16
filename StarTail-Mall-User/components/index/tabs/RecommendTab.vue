@@ -8,13 +8,13 @@ import Commodity from '@/components/common/Commodity.vue';
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { ref } from 'vue';
 
-const swiperList = ref({});
-const noticeList = ref({});
+const swiperList = ref([]);
+const noticeList = ref([]);
 const recommendData = ref({});
-const maybeLikeList = ref({});
-const gameList = ref({});
-const artList = ref({});
-const jokeList = ref({});
+const maybeLikeList = ref([]);
+const gameList = ref([]);
+const artList = ref([]);
+const jokeList = ref([]);
 const Flag = ref(false);
 onLoad(() => {
 	uni.request({
