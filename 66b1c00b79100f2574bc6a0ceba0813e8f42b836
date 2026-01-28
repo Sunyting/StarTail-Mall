@@ -1,0 +1,83 @@
+StarTail-Mall-User/components/index/tabs/AnimationTab.vue
+  c26800c78f6cd52d 2-8,10-43,45-53
+StarTail-Mall-User/components/index/tabs/GameTab.vue
+  6d499949f4ed4e38 2-8,10-43,45-53
+StarTail-Mall-User/components/index/tabs/JokeTab.vue
+  0ee3365b64bf2086 2-8,10-43,45-53
+StarTail-Mall-User/components/index/tabs/ArtTab.vue
+  15cd41281393aa67 2-8,10-43,45-53
+StarTail-Mall-User/components/index/tabs/PetTab.vue
+  2a280d25ef81f400 2-8,10-43,45-53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.24",
+  "base_commit_sha": "66b1c00b79100f2574bc6a0ceba0813e8f42b836",
+  "prompts": {
+    "0ee3365b64bf2086": {
+      "agent_id": {
+        "tool": "mock_ai",
+        "id": "ai-thread-1769496871914569200",
+        "model": "unknown"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 52,
+      "total_deletions": 2,
+      "accepted_lines": 50,
+      "overriden_lines": 0
+    },
+    "15cd41281393aa67": {
+      "agent_id": {
+        "tool": "mock_ai",
+        "id": "ai-thread-1769497348553085500",
+        "model": "unknown"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 52,
+      "total_deletions": 2,
+      "accepted_lines": 50,
+      "overriden_lines": 0
+    },
+    "2a280d25ef81f400": {
+      "agent_id": {
+        "tool": "mock_ai",
+        "id": "ai-thread-1769496813401156200",
+        "model": "unknown"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 52,
+      "total_deletions": 2,
+      "accepted_lines": 50,
+      "overriden_lines": 0
+    },
+    "6d499949f4ed4e38": {
+      "agent_id": {
+        "tool": "mock_ai",
+        "id": "ai-thread-1769496694248362500",
+        "model": "unknown"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 52,
+      "total_deletions": 2,
+      "accepted_lines": 50,
+      "overriden_lines": 0
+    },
+    "c26800c78f6cd52d": {
+      "agent_id": {
+        "tool": "mock_ai",
+        "id": "ai-thread-1769497293130988300",
+        "model": "unknown"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 52,
+      "total_deletions": 2,
+      "accepted_lines": 50,
+      "overriden_lines": 0
+    }
+  }
+}
