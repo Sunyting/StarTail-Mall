@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 跨域
 const cors = require('cors');
 app.use(cors({
-	origin: 'http://localhost:5173'
+	origin: '*'
 }));
 
 app.use('/', indexRouter);

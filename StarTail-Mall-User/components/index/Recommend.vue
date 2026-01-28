@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 const handleBuy = () => {
 	// 方式1：跳转到tabBar页面（如my是tabBar页面）
 	uni.switchTab({
@@ -12,17 +12,30 @@ const handleBuy = () => {
 	// });
 };
 const props = defineProps({
-	recommendData: Object
+	recommendData: {
+		type: Object,
+		default: () => ({})
+	}
+});
+
+// 计算属性，提供默认值以防止空数据问题
+const safeRecommendData = computed(() => {
+	return {
+		bigImgUrl: props.recommendData.bigImgUrl || '',
+		List: props.recommendData.List || []
+	};
 });
 </script>
 
 <template>
 	<view class="page-content">
 		<view class="recommend-item">
-			<image class="item-big" :src="`${props.recommendData.bigImgUrl}`" mode="widthfill"></image>
+			<!-- 大图片使用image标签 -->
+			<image v-if="safeRecommendData.bigImgUrl" class="item-big" :src="safeRecommendData.bigImgUrl" mode="widthfill"></image>
 			<view class="product">
-				<view class="product-item" v-for="(item, index) in props.recommendData.List" :key="index">
-					<view class="item-img" :style="{ backgroundImage: `url(${item.imgUrl})` }" mode="widthFill"></view>
+				<view class="product-item" v-for="(item, index) in safeRecommendData.List" :key="index">
+					<!-- 使用image标签替代背景图片，微信小程序对backgroundImage支持有限 -->
+					<image v-if="item.imgUrl" class="item-img" :src="item.imgUrl" mode="widthFill"></image>
 					<view class="item-name">{{ item.name }}</view>
 					<view class="item-footer">
 						<view class="left">
@@ -63,24 +76,25 @@ const props = defineProps({
 
 			.product-item {
 				width: calc(50% - 15rpx);
-				height: 300rpx;
+				height: 400rpx;
 				border-radius: 12rpx;
 				overflow: hidden;
 				box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
 				text-align: center;
 				display: flex;
 				flex-direction: column;
-				justify-content: center;
+				justify-content: flex-start;
 				align-items: center;
-				align-content: space-between;
 				gap: 10rpx;
 
 				.item-img {
-					width: 80%;
-					height: 60%;
-					background-position: center;
-					background-repeat: no-repeat;
-					background-size: cover;
+					width: 100%;
+					height: 240rpx;
+				}
+				.item-img image {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
 				}
 				.item-name {
 					font-size: 30rpx;
@@ -103,7 +117,8 @@ const props = defineProps({
 					.right {
 						width: 150rpx;
 						height: 60rpx;
-						background-image: url(@/static/index/recommend/立即抢购.png);
+						/* 微信小程序需要使用绝对路径 */
+						background-image: url(/static/index/recommend/立即抢购.png);
 						background-position: center;
 						background-repeat: no-repeat;
 						background-size: contain;

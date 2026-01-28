@@ -1,4 +1,3 @@
-<!-- pages/index/index.vue -->
 <script setup>
 import { ref, onMounted, computed, markRaw } from 'vue';
 import { useNavBarStyle } from '@/utils/system.js';
@@ -92,65 +91,67 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .page-wrap {
-	width: 100%;
-	min-height: 100vh;
-	background: #f8f8f8;
+  width: 100%;
+  min-height: 100vh;
+  background: #f8f8f8;
 
-	.fixed-nav {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		z-index: 1000;
-	}
+  .fixed-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
 
-	.header-placeholder {
-		width: 100%;
-		.nav-placeholder {
-			height: 200rpx;
-		}
-		.search-placeholder {
-			height: 10rpx;
-		}
-	}
+  .header-placeholder {
+    width: 100%;
 
-	.scroll-content {
-		white-space: nowrap;
-		height: 80rpx;
-		background: #fff;
-		border-bottom: 1rpx solid #f0f0f0;
-		box-sizing: border-box;
+    .nav-placeholder {
+      height: 200rpx;
+    }
 
-		.scroll-item {
-			display: inline-block;
-			padding: 0 30rpx;
-			font-size: 30rpx;
-			font-weight: 700;
-			height: 80rpx;
-			line-height: 80rpx;
-			position: relative;
+    .search-placeholder {
+      height: 10rpx;
+    }
+  }
 
-			.top {
-				color: #666;
-				transition: color 0.3s;
-			}
+  .scroll-content {
+    white-space: nowrap;
+    height: 80rpx;
+    background: #fff;
+    border-bottom: 1rpx solid #f0f0f0;
+    box-sizing: border-box;
 
-			.top-active {
-				color: #f798c1;
-				border-bottom: 2px solid;
-			}
-		}
-	}
+    .scroll-item {
+      display: inline-block;
+      padding: 0 30rpx;
+      font-size: 30rpx;
+      font-weight: 700;
+      height: 80rpx;
+      line-height: 80rpx;
+      position: relative;
 
-	.swiper-container {
-		height: calc(100vh - 280rpx);
-		background: #f8f8f8;
+      .top {
+        color: #666;
+        transition: color 0.3s;
+      }
 
-		.swiper-item {
-			height: 100%;
-			overflow-y: auto;
-			padding-bottom: 100rpx;
-		}
-	}
+      .top-active {
+        color: #f798c1;
+        border-bottom: 2px solid;
+      }
+    }
+  }
+
+  .swiper-container {
+    height: calc(100vh - 280rpx);
+    background: #f8f8f8;
+
+    .swiper-item {
+      height: 100%;
+      overflow-y: auto;
+      padding-bottom: 100rpx;
+    }
+  }
 }
 </style>

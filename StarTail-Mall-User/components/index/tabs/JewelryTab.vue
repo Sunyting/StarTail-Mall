@@ -5,6 +5,7 @@ import Hot from '@/components/index/Hot.vue';
 import Shop from '@/components/index/Shop.vue';
 import Card from '@/components/common/Card.vue';
 import Commodity from '@/components/common/Commodity.vue';
+import http from '@/utils/api/request.js';
 
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { ref } from 'vue';
@@ -15,18 +16,28 @@ const hotList = ref([]);
 const shopData = ref({});
 const recommendList = ref([]);
 const Flag = ref(false);
-onLoad(() => {
-	uni.request({
-		url: 'http://localhost:3001/api/index_list/jewelry',
-		success: (res) => {
-			bannerImgUrl.value = res.data.data.bannerImgUrl;
-			iconList.value = res.data.data.iconList;
-			hotList.value = res.data.data.hotList;
-			shopData.value = res.data.data.shopData;
-			recommendList.value = res.data.data.recommendList;
+
+const init = () => {
+	http.request({
+		url: '/index_list/jewelry'
+	})
+		.then((res) => {
+			bannerImgUrl.value = res.data.bannerImgUrl;
+			iconList.value = res.data.iconList;
+			hotList.value = res.data.hotList;
+			shopData.value = res.data.shopData;
+			recommendList.value = res.data.recommendList;
 			Flag.value = true;
-		}
-	});
+		})
+		.catch((error) => {
+			console.error(error);
+			uni.showToast({
+				title: '请求失败'
+			});
+		});
+};
+onLoad(() => {
+	init();
 });
 </script>
 

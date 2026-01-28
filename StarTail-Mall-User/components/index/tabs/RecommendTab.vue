@@ -4,6 +4,7 @@ import Notice from '@/components/index/notice/Notice.vue';
 import Recommend from '@/components/index/Recommend.vue';
 import Card from '@/components/common/Card.vue';
 import Commodity from '@/components/common/Commodity.vue';
+import http from '@/utils/api/request.js';
 
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { ref } from 'vue';
@@ -16,21 +17,31 @@ const gameList = ref([]);
 const artList = ref([]);
 const jokeList = ref([]);
 const Flag = ref(false);
-onLoad(() => {
-	uni.request({
-		url: 'http://localhost:3001/api/index_list/recommend',
-		success: (res) => {
-			swiperList.value = res.data.data.swiperData.List;
-			noticeList.value = res.data.data.noticeData.List;
-			recommendData.value = res.data.data.recommendData;
-			maybeLikeList.value = res.data.data.maybeLikeList;
-			gameList.value = res.data.data.gameList;
-			artList.value = res.data.data.artList;
-			jokeList.value = res.data.data.jokeList;
+
+const init = () => {
+	http.request({
+		url: '/index_list/recommend'
+	})
+		.then((res) => {
+			swiperList.value = res.data.swiperData.List;
+			noticeList.value = res.data.noticeData.List;
+			recommendData.value = res.data.recommendData;
+			maybeLikeList.value = res.data.maybeLikeList;
+			gameList.value = res.data.gameList;
+			artList.value = res.data.artList;
+			jokeList.value = res.data.jokeList;
 			Flag.value = true;
-			console.log(res.data.data);
-		}
-	});
+			console.log(res.data);
+		})
+		.catch((error) => {
+			console.error(error);
+			uni.showToast({
+				title: '请求失败'
+			});
+		});
+};
+onLoad(() => {
+	init();
 });
 </script>
 

@@ -3,15 +3,22 @@
 import { ref } from 'vue';
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import Commodity from './Commodity.vue';
+import http from '@/utils/api/request.js';
 let commodityData = ref();
 const init = () => {
-	uni.request({
-		url: 'http://localhost:3001/api/index_list/recommend',
-		success: (res) => {
+	http.request({
+		url: '/index_list/recommend'
+	})
+		.then((res) => {
 			commodityData.value = res.data.data.commodityData.List;
-		}
-	});
+		})
+		.catch(() => {
+			uni.showToast({
+				title: '请求失败'
+			});
+		});
 };
+
 onLoad(() => {
 	init();
 });
