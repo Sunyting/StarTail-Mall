@@ -1,0 +1,64 @@
+StarTail-Mall-User/server/routes/index.js
+  29b0887ff7b2eecc 631-785,951-1106
+  ca0f8a2d4d904433 153-305
+  2aec5aefe2f6a8c0 471-626
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.39",
+  "base_commit_sha": "435978a5e8fb60e380208a065018d71a882750fe",
+  "prompts": {
+    "29b0887ff7b2eecc": {
+      "agent_id": {
+        "tool": "mock_ai",
+        "id": "ai-thread-1769668421463887000",
+        "model": "unknown"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 316,
+      "total_deletions": 2,
+      "accepted_lines": 312,
+      "overriden_lines": 0
+    },
+    "2aec5aefe2f6a8c0": {
+      "agent_id": {
+        "tool": "mock_ai",
+        "id": "ai-thread-1769668323826184900",
+        "model": "unknown"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 158,
+      "total_deletions": 1,
+      "accepted_lines": 156,
+      "overriden_lines": 0
+    },
+    "ca0f8a2d4d904433": {
+      "agent_id": {
+        "tool": "mock_ai",
+        "id": "ai-thread-1769668281422157300",
+        "model": "unknown"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 153,
+      "total_deletions": 1,
+      "accepted_lines": 153,
+      "overriden_lines": 0
+    },
+    "d441711434a17df8": {
+      "agent_id": {
+        "tool": "mock_ai",
+        "id": "ai-thread-1769667600434957000",
+        "model": "unknown"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 9,
+      "total_deletions": 9,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    }
+  }
+}
