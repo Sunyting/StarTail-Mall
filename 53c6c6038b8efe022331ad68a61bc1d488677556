@@ -1,0 +1,23 @@
+StarTail-Mall-User/server/routes/index.js
+  c14c3b0973038a20 1109-1269
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.39",
+  "base_commit_sha": "53c6c6038b8efe022331ad68a61bc1d488677556",
+  "prompts": {
+    "c14c3b0973038a20": {
+      "agent_id": {
+        "tool": "turing-coder",
+        "id": "JDJBXJ90wI0H",
+        "model": "claude-4"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 1351,
+      "total_deletions": 1109,
+      "accepted_lines": 168,
+      "overriden_lines": 0
+    }
+  }
+}
