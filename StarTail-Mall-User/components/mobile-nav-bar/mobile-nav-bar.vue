@@ -5,8 +5,20 @@ import { statusBarH, useNavBarStyle } from '../../utils/system.js';
 import { computed, ref, onMounted } from 'vue';
 
 const searchValue = ref('');
+
 const handleSearch = () => {
-	console.log('search');
+	uni.navigateTo({
+		url: '/pages/Search/Search'
+	});
+};
+
+// 处理输入框点击事件
+const handleInputFocus = () => {
+	setTimeout(() => {
+		uni.navigateTo({
+			url: '/pages/Search/Search'
+		});
+	}, 100);
 };
 
 // 父传子参数
@@ -18,6 +30,11 @@ const props = defineProps({
 	title: {
 		type: String,
 		default: ''
+	},
+	// 是否跳转
+	change: {
+		type: Number,
+		default: 1
 	}
 });
 
@@ -103,6 +120,7 @@ onMounted(() => {
 				placeholder="请搜索商品~"
 				@iconClick="handleSearch"
 				@confirm="handleSearch"
+				@focus="handleInputFocus"
 			></uni-easyinput>
 		</view>
 	</view>
@@ -116,8 +134,8 @@ onMounted(() => {
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 140rpx; /* 默认高度 */
-		background-size: cover !important; /* 添加!important确保覆盖 */
+		height: 140rpx;
+		background-size: cover !important;
 
 		.status {
 			font-size: 18rpx;

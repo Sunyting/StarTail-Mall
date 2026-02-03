@@ -4,12 +4,13 @@ import { useNavBarStyle } from '@/utils/system.js';
 
 // 导入 tab 组件
 import RecommendTab from '@/components/index/tabs/RecommendTab.vue';
-import AnimationeTab from '@/components/index/tabs/AnimationTab.vue';
+import AnimationTab from '@/components/index/tabs/AnimationTab.vue';
 import GameTab from '@/components/index/tabs/GameTab.vue';
 import ArtTab from '@/components/index/tabs/ArtTab.vue';
 import PetTab from '@/components/index/tabs/PetTab.vue';
 import JewelryTab from '@/components/index/tabs/JewelryTab.vue';
 import JokeTab from '@/components/index/tabs/JokeTab.vue';
+import MusicTab from '@/components/index/tabs/MusicTab.vue';
 
 const { statusBarHeight } = useNavBarStyle();
 
@@ -21,7 +22,7 @@ const topBar = ref([
 	},
 	{
 		name: '漫画动漫',
-		component: markRaw(AnimationeTab)
+		component: markRaw(AnimationTab)
 	},
 	{
 		name: '游戏周边',
@@ -38,6 +39,10 @@ const topBar = ref([
 	{
 		name: '珠宝首饰',
 		component: markRaw(JewelryTab)
+	},
+	{
+		name: '畅听新声',
+		component: markRaw(MusicTab)
 	},
 	{
 		name: '生活调剂',
@@ -58,10 +63,6 @@ const changeTab = (index) => {
 const onChangeTab = (e) => {
 	changeTab(e.detail.current);
 };
-
-onMounted(() => {
-	console.log('1' + statusBarHeight);
-});
 </script>
 
 <template>
@@ -81,77 +82,82 @@ onMounted(() => {
 		<swiper @change="onChangeTab" :current="topBarIndex" class="swiper-container" :duration="300">
 			<swiper-item v-for="(item, index) in topBar" :key="index">
 				<view class="swiper-item">
-					<!-- 动态组件，根据配置渲染不同的组件 -->
-					<component :is="item.component" v-bind="item.props || {}" v-if="topBarIndex === index" />
+					<RecommendTab v-if="item.name === '推荐'" v-show="topBarIndex === index" v-bind="item.props || {}" />
+					<AnimationTab v-if="item.name === '漫画动漫'" v-show="topBarIndex === index" v-bind="item.props || {}" />
+					<GameTab v-if="item.name === '游戏周边'" v-show="topBarIndex === index" v-bind="item.props || {}" />
+					<ArtTab v-if="item.name === '美术画集'" v-show="topBarIndex === index" v-bind="item.props || {}" />
+					<PetTab v-if="item.name === '宠物用品'" v-show="topBarIndex === index" v-bind="item.props || {}" />
+					<JewelryTab v-if="item.name === '珠宝首饰'" v-show="topBarIndex === index" v-bind="item.props || {}" />
+					<MusicTab v-if="item.name === '畅听新声'" v-show="topBarIndex === index" v-bind="item.props || {}" />
+					<JokeTab v-if="item.name === '生活调剂'" v-show="topBarIndex === index" v-bind="item.props || {}" />
 				</view>
 			</swiper-item>
 		</swiper>
 	</view>
 </template>
-
 <style lang="scss" scoped>
 .page-wrap {
-  width: 100%;
-  min-height: 100vh;
-  background: #f8f8f8;
+	width: 100%;
+	min-height: 100vh;
+	background: #f8f8f8;
 
-  .fixed-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-  }
+	.fixed-nav {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 1000;
+	}
 
-  .header-placeholder {
-    width: 100%;
+	.header-placeholder {
+		width: 100%;
 
-    .nav-placeholder {
-      height: 200rpx;
-    }
+		.nav-placeholder {
+			height: 200rpx;
+		}
 
-    .search-placeholder {
-      height: 10rpx;
-    }
-  }
+		.search-placeholder {
+			height: 10rpx;
+		}
+	}
 
-  .scroll-content {
-    white-space: nowrap;
-    height: 80rpx;
-    background: #fff;
-    border-bottom: 1rpx solid #f0f0f0;
-    box-sizing: border-box;
+	.scroll-content {
+		white-space: nowrap;
+		height: 80rpx;
+		background: #fff;
+		border-bottom: 1rpx solid #f0f0f0;
+		box-sizing: border-box;
 
-    .scroll-item {
-      display: inline-block;
-      padding: 0 30rpx;
-      font-size: 30rpx;
-      font-weight: 700;
-      height: 80rpx;
-      line-height: 80rpx;
-      position: relative;
+		.scroll-item {
+			display: inline-block;
+			padding: 0 30rpx;
+			font-size: 30rpx;
+			font-weight: 700;
+			height: 80rpx;
+			line-height: 80rpx;
+			position: relative;
 
-      .top {
-        color: #666;
-        transition: color 0.3s;
-      }
+			.top {
+				color: #666;
+				transition: color 0.3s;
+			}
 
-      .top-active {
-        color: #f798c1;
-        border-bottom: 2px solid;
-      }
-    }
-  }
+			.top-active {
+				color: #f798c1;
+				border-bottom: 2px solid;
+			}
+		}
+	}
 
-  .swiper-container {
-    height: calc(100vh - 280rpx);
-    background: #f8f8f8;
+	.swiper-container {
+		height: calc(100vh - 280rpx);
+		background: #f8f8f8;
 
-    .swiper-item {
-      height: 100%;
-      overflow-y: auto;
-      padding-bottom: 100rpx;
-    }
-  }
+		.swiper-item {
+			height: 100%;
+			overflow-y: auto;
+			padding-bottom: 100rpx;
+		}
+	}
 }
 </style>
