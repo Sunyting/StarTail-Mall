@@ -1,0 +1,23 @@
+StarTail-Mall-User/components/index/tabs/ArtTab.vue
+  3e365e63da7ca004 18,31-57,67-111,121-148,155-166,170-303,305-311
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.39",
+  "base_commit_sha": "a1e2cd36d501cfa5f9643831fa8647738e57607c",
+  "prompts": {
+    "3e365e63da7ca004": {
+      "agent_id": {
+        "tool": "turing-coder",
+        "id": "h2CuRATcNFIV",
+        "model": "claude-4"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 256,
+      "total_deletions": 1,
+      "accepted_lines": 255,
+      "overriden_lines": 0
+    }
+  }
+}
