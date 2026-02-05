@@ -19,11 +19,11 @@ const props = defineProps({
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;
-	padding: 10rpx;
+	padding: 3% 0;
 	box-sizing: border-box;
 
 	.icon-item {
-		width: 25%; /* 一行4个，每个25%宽度 */
+		width: 25%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -32,14 +32,14 @@ const props = defineProps({
 		box-sizing: border-box;
 
 		.icon-img {
-			width: 120rpx;
-			height: 120rpx;
+			width: 145rpx;
+			height: 145rpx;
 			margin-bottom: 10rpx;
 			border-radius: 50%;
 		}
 
 		.icon-text {
-			font-size: 24rpx;
+			font-size: 28rpx;
 			color: #333;
 			text-align: center;
 			line-height: 1.4;

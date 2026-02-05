@@ -50,7 +50,7 @@ onLoad(() => {
 		<Card name="推荐店铺" />
 		<Shop :shopData="shopData" />
 		<Card name="为您推荐" />
-		<Commodity :dataList="recommendList" />
+		<!-- <Commodity :dataList="recommendList" /> -->
 	</view>
 </template>
 

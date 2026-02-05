@@ -1,5 +1,6 @@
 <!-- Commodity.vue -->
 <script setup>
+import { onLoad } from '@dcloudio/uni-app';
 const props = defineProps({
 	dataList: Array,
 	itemwidth: {
@@ -11,10 +12,12 @@ const props = defineProps({
 		default: 'wrap'
 	}
 });
+
+onLoad(() => {});
 </script>
 
 <template>
-	<view class="container" :style="{ flexWrap: flexWrap }">
+	<view class="container" :style="{ flexWrap: flexWrap }" v-if="dataList">
 		<view class="commodity-wrap" v-for="(item, index) in dataList" :key="index" :style="{ width: itemwidth + 'rpx' }">
 			<view class="img-container">
 				<image class="img" :src="item.imgUrl" mode="aspectFill" />

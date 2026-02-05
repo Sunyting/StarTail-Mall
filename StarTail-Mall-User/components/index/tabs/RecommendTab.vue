@@ -31,7 +31,6 @@ const init = () => {
 			artList.value = res.data.artList;
 			jokeList.value = res.data.jokeList;
 			Flag.value = true;
-			console.log(res.data);
 		})
 		.catch((error) => {
 			console.error(error);

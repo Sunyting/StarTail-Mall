@@ -7,7 +7,6 @@ const props = defineProps({
 		default: () => ({})
 	}
 });
-console.log(props.shopData);
 </script>
 
 <template>

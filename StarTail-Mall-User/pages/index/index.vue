@@ -14,14 +14,13 @@ import MusicTab from '@/components/index/tabs/MusicTab.vue';
 
 const { statusBarHeight } = useNavBarStyle();
 
-// 顶部 tab 栏配置 - 使用 markRaw 包裹组件
 const topBar = ref([
 	{
 		name: '推荐',
 		component: markRaw(RecommendTab)
 	},
 	{
-		name: '漫画动漫',
+		name: '次元穿梭',
 		component: markRaw(AnimationTab)
 	},
 	{
@@ -29,7 +28,7 @@ const topBar = ref([
 		component: markRaw(GameTab)
 	},
 	{
-		name: '美术画集',
+		name: '艺术收藏',
 		component: markRaw(ArtTab)
 	},
 	{
@@ -83,9 +82,9 @@ const onChangeTab = (e) => {
 			<swiper-item v-for="(item, index) in topBar" :key="index">
 				<view class="swiper-item">
 					<RecommendTab v-if="item.name === '推荐'" v-show="topBarIndex === index" v-bind="item.props || {}" />
-					<AnimationTab v-if="item.name === '漫画动漫'" v-show="topBarIndex === index" v-bind="item.props || {}" />
+					<AnimationTab v-if="item.name === '次元穿梭'" v-show="topBarIndex === index" v-bind="item.props || {}" />
 					<GameTab v-if="item.name === '游戏周边'" v-show="topBarIndex === index" v-bind="item.props || {}" />
-					<ArtTab v-if="item.name === '美术画集'" v-show="topBarIndex === index" v-bind="item.props || {}" />
+					<ArtTab v-if="item.name === '艺术收藏'" v-show="topBarIndex === index" v-bind="item.props || {}" />
 					<PetTab v-if="item.name === '宠物用品'" v-show="topBarIndex === index" v-bind="item.props || {}" />
 					<JewelryTab v-if="item.name === '珠宝首饰'" v-show="topBarIndex === index" v-bind="item.props || {}" />
 					<MusicTab v-if="item.name === '畅听新声'" v-show="topBarIndex === index" v-bind="item.props || {}" />

@@ -26,7 +26,8 @@ const init = () => {
 			iconList.value = res.data.iconList;
 			hotList.value = res.data.hotList;
 			shopData.value = res.data.shopData;
-			recommendList.value = res.data.recommendList;
+			// recommendList.value = res.data.recommendList;
+			console.log(res.data);
 			Flag.value = true;
 		})
 		.catch((error) => {
@@ -50,7 +51,7 @@ onLoad(() => {
 		<Card name="推荐店铺" />
 		<Shop :shopData="shopData" />
 		<Card name="为您推荐" />
-		<Commodity :dataList="recommendList" />
+		<!-- <Commodity :dataList="recommendList" /> -->
 	</view>
 </template>
 
