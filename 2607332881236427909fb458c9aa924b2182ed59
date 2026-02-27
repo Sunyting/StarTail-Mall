@@ -1,0 +1,23 @@
+StarTail-Mall-User/pages/Search/Search.vue
+  bb1a6b7ec36021ea 5-6,9-14,16-27,30-173,175-183,186-191,226-231,261-339,432,434,437-620
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.39",
+  "base_commit_sha": "2607332881236427909fb458c9aa924b2182ed59",
+  "prompts": {
+    "bb1a6b7ec36021ea": {
+      "agent_id": {
+        "tool": "turing-coder",
+        "id": "3m6ycEKDLCy7",
+        "model": "claude-4"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 452,
+      "total_deletions": 7,
+      "accepted_lines": 452,
+      "overriden_lines": 0
+    }
+  }
+}
