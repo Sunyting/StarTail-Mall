@@ -359,7 +359,7 @@ router.get('/api/index_list/game', function(req, res, next) {
 					nprice: '200',
 					oprice: '405',
 					discount: '4.9'
-				}, ,
+				},
 				{
 					id: 1,
 					imgUrl: '/static/index/hot/游戏周边/hot2.png',
