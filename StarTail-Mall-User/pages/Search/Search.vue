@@ -2,6 +2,8 @@
 import { WINDOW_INFO } from '../../utils/config.js';
 import { useNavBarStyle } from '../../utils/system.js';
 import { computed, ref, onMounted } from 'vue';
+import Commodity from '@/components/common/Commodity.vue';
+import http from '@/utils/api/request.js';
 
 const searchValue = ref('');
 const searchHistory = ref([]);
@@ -264,7 +266,9 @@ onMounted(() => {
 	}
 
 	.content-area {
+	.content-area {
 		width: 100%;
+		min-height: calc(100vh - 240rpx);
 		min-height: calc(100vh - 240rpx);
 		padding: 20rpx;
 		box-sizing: border-box;
