@@ -1,0 +1,25 @@
+StarTail-Mall-User/pages/Search/Search.vue
+  dd6458c750ab9a6b 7,9-12,19-23,25-26,29,33,40,42,45-48,57,63,69,73,81,115-117,146,148-152,154-158,161-166,168,170,172-173,266,268,271-274,280-284,286,289-297,299-300,302-307,309,311-315,317-322,324-327,331-332,336,338-339,344,347-348,353,357,359-363,365,367-371,375-376
+StarTail-Mall-User/pages/Search/Search-list.vue
+  dd6458c750ab9a6b 1-669
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.39",
+  "base_commit_sha": "6480d4f40addb86cab7612852a8a12118d533eb5",
+  "prompts": {
+    "dd6458c750ab9a6b": {
+      "agent_id": {
+        "tool": "turing-coder",
+        "id": "Dm9uMolqeGZZ",
+        "model": "claude-4"
+      },
+      "human_author": "Dolores-not-ai <542349654@qq.com>",
+      "messages": [],
+      "total_additions": 2274,
+      "total_deletions": 1296,
+      "accepted_lines": 1289,
+      "overriden_lines": 52
+    }
+  }
+}
