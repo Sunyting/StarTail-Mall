@@ -37,27 +37,13 @@
 			"style": {
 				"navigationBarTitleText": "搜索",
 				"navigationStyle": "custom"
-				// "app-plus": {
-				// 	"scrollIndicator": "none",
-				// 	"titleNView": {
-				// 		"searchInput": {
-				// 			"placeholder": "周边",
-				// 			"disabled": false,
-				// 			"align": "left",
-				// 			"autoFocus": true,
-				// 			"borderRadius": "15px",
-				// 			"backgroundColor": "#F7F7F7",
-				// 			"placeholderColor": "#B3B3B3"
-				// 		},
-				// 		"buttons": [{
-				// 			"float": "right",
-				// 			"color": "#f5f5f5",
-				// 			"text": "搜索",
-				// 			"fontSize": "16rpx",
-				// 			"width": "40rpx"
-				// 		}]
-				// 	}
-				// }
+			}
+		},
+		{
+			"path": "pages/Search/Search-list",
+			"style": {
+				"navigationBarTitleText": "搜索结果",
+				"navigationStyle": "custom"
 			}
 		}
 	],

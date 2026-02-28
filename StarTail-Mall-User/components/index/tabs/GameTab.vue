@@ -26,8 +26,7 @@ const init = () => {
 			iconList.value = res.data.iconList;
 			hotList.value = res.data.hotList;
 			shopData.value = res.data.shopData;
-			// recommendList.value = res.data.recommendList;
-			console.log(res.data);
+			recommendList.value = res.data.recommendList;
 			Flag.value = true;
 		})
 		.catch((error) => {
