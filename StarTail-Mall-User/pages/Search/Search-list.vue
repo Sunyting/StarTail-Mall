@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onLoad } from '@dcloudio/uni-app';
+import { onLoad } from '@dcloudio/uni-app';
+import { computed, ref, onMounted, watch } from 'vue';
 import Commodity from '@/components/common/Commodity.vue';
 import http from '@/utils/api/request.js';
 
@@ -145,8 +146,8 @@ const initBrandsFromResults = () => {
 
 // ========== 排序功能 ==========
 const changeSort = (sortType) => {
-	if (currentSort.value === sortType && sortType !== 'comprehensive') {
-		// 相同排序项（非综合排序），切换升降序
+	if (currentSort.value === sortType) {
+		// 相同排序项，切换升降序
 		sortOrder.value = sortOrder.value === 'desc' ? 'asc' : 'desc';
 	} else {
 		// 不同排序项，默认降序
@@ -241,7 +242,7 @@ const goBack = () => {
 
 const goToSearch = () => {
 	uni.navigateTo({
-		url: '/pages/search/search'
+		url: '/pages/Search/search'
 	});
 };
 

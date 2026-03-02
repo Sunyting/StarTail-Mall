@@ -1109,71 +1109,71 @@ router.get('/api/index_list/music', function(req, res, next) {
 	res.send({
 		"code": 0,
 		"data": {
-			bannerImgUrl: '/static/index/banner/音乐周边.png',
+			bannerImgUrl: '/static/index/banner/音乐唱片.png',
 			iconList: [{
 					id: 0,
-					title: '耳机',
-					imgUrl: '/static/index/icon/音乐周边/1.png'
+					title: '流行唱片',
+					imgUrl: '/static/index/icon/音乐周边/电子唱片.png'
 				},
 				{
 					id: 1,
-					title: '音响',
-					imgUrl: '/static/index/icon/音乐周边/2.png'
+					title: '经典唱片',
+					imgUrl: '/static/index/icon/音乐周边/实体唱片.png'
 				},
 				{
 					id: 2,
-					title: '乐器',
-					imgUrl: '/static/index/icon/音乐周边/3.png'
+					title: '限量版',
+					imgUrl: '/static/index/icon/音乐周边/车载歌单.png'
 				},
 				{
 					id: 3,
-					title: '唱片',
-					imgUrl: '/static/index/icon/音乐周边/4.png'
+					title: '明星签名',
+					imgUrl: '/static/index/icon/音乐周边/耳机.png'
 				},
 				{
 					id: 4,
-					title: '话筒',
-					imgUrl: '/static/index/icon/音乐周边/5.png'
+					title: '明星写真',
+					imgUrl: '/static/index/icon/音乐周边/话筒.png'
 				},
 				{
 					id: 5,
-					title: '音乐盒',
+					title: '演唱会周边',
 					imgUrl: '/static/index/icon/音乐周边/6.png'
 				},
 				{
 					id: 6,
-					title: '配件',
+					title: '明星同款',
 					imgUrl: '/static/index/icon/音乐周边/7.png'
 				},
 				{
 					id: 7,
-					title: '明星周边',
+					title: '粉丝收藏',
 					imgUrl: '/static/index/icon/音乐周边/8.png'
 				}
 			],
 			hotList: [{
 					id: 1,
 					imgUrl: '/static/index/hot/音乐周边/hot1.png',
-					name: 'Sony索尼WH-1000XM5无线蓝牙降噪头戴式耳机音乐HIFI',
-					nprice: '2299',
-					oprice: '2899',
-					discount: '7.9'
+					name: '【Taylor Swift】最新专辑《Midnights》限量版黑胶唱片',
+					nprice: '299',
+					oprice: '399',
+					discount: '7.5'
 				},
 				{
 					id: 2,
 					imgUrl: '/static/index/hot/音乐周边/hot2.png',
-					name: 'JBL FLIP6音乐万花筒便携式无线蓝牙音箱户外防水音响',
-					nprice: '799',
-					oprice: '999',
-					discount: '8.0'
+					name: '【周杰伦】《最伟大的作品》签名版CD专辑 官方正版',
+					nprice: '199',
+					oprice: '299',
+					discount: '6.7'
 				},
 				{
 					id: 3,
 					imgUrl: '/static/index/hot/音乐周边/hot3.png',
-					name: '卡马民谣吉他41寸初学者入门木吉他学生男女乐器guitarra',
-					nprice: '599',
-					oprice: '899',
-					discount: '6.7'
+					name: '【邓紫棋】演唱会周边礼盒装 含签名海报+CD+徽章',
+					nprice: '168',
+					oprice: '258',
+					discount: '6.5'
 				}
 			],
 			shopData: {
@@ -1181,50 +1181,50 @@ router.get('/api/index_list/music', function(req, res, next) {
 				shopList: [{
 						id: 0,
 						imgUrl: '/static/index/shop/音乐周边/1.png',
-						name: 'AirPods Pro 2代苹果无线蓝牙耳机主动降噪入耳式耳机',
-						nprice: '1899',
-						oprice: '2399',
+						name: '【林俊杰】《Message in a Bottle》限量珍藏版唱片',
+						nprice: '189',
+						oprice: '239',
 						discount: '7.9'
 					},
 					{
 						id: 1,
 						imgUrl: '/static/index/shop/音乐周边/2.png',
-						name: 'Audio-Technica铁三角ATH-M50x专业监听耳机头戴式',
-						nprice: '1199',
-						oprice: '1499',
+						name: '【蔡徐坤】首张专辑《1》签名版CD+明星写真集',
+						nprice: '119',
+						oprice: '149',
 						discount: '8.0'
 					},
 					{
 						id: 2,
 						imgUrl: '/static/index/shop/音乐周边/3.png',
-						name: '雅马哈PSR-E273电子琴61键初学者入门成人儿童电子钢琴',
-						nprice: '899',
-						oprice: '1299',
-						discount: '6.9'
+						name: '【BLACKPINK】《THE ALBUM》韩版进口黑胶唱片',
+						nprice: '299',
+						oprice: '399',
+						discount: '7.5'
 					},
 					{
 						id: 3,
 						imgUrl: '/static/index/shop/音乐周边/4.png',
-						name: 'Blue Yeti雪怪USB电容麦克风录音话筒直播K歌游戏语音',
-						nprice: '1299',
-						oprice: '1699',
-						discount: '7.6'
+						name: '【陈奕迅】经典金曲合集黑胶LP唱片 复古收藏版',
+						nprice: '359',
+						oprice: '459',
+						discount: '7.8'
 					},
 					{
 						id: 4,
 						imgUrl: '/static/index/shop/音乐周边/5.png',
-						name: '哈曼卡顿琉璃3代水晶音箱蓝牙音响家用重低音炮透明音箱',
-						nprice: '1599',
-						oprice: '1999',
-						discount: '8.0'
+						name: '【薛之谦】《天外来物》专辑CD 含明星签名照片',
+						nprice: '99',
+						oprice: '139',
+						discount: '7.1'
 					},
 					{
 						id: 5,
 						imgUrl: '/static/index/shop/音乐周边/6.png',
-						name: 'Spotify Premium会员卡音乐流媒体服务年费订阅码',
-						nprice: '399',
-						oprice: '599',
-						discount: '6.7'
+						name: '【周深】深的深演唱会纪念品套装 限量发售',
+						nprice: '268',
+						oprice: '368',
+						discount: '7.3'
 					}
 
 				]
@@ -1232,34 +1232,34 @@ router.get('/api/index_list/music', function(req, res, next) {
 			recommendList: [{
 					id: 1,
 					imgUrl: '/static/index/hot/音乐周边/hot1.png',
-					name: 'Sony索尼WH-1000XM5无线蓝牙降噪头戴式耳机音乐HIFI',
-					nprice: '2299',
-					oprice: '2899',
-					discount: '7.9'
+					name: '【五月天】《人生无限公司》正版专辑CD+明星海报',
+					nprice: '89',
+					oprice: '129',
+					discount: '6.9'
 				},
 				{
 					id: 2,
 					imgUrl: '/static/index/hot/音乐周边/hot2.png',
-					name: 'JBL FLIP6音乐万花筒便携式无线蓝牙音箱户外防水音响',
-					nprice: '799',
-					oprice: '999',
-					discount: '8.0'
+					name: '【毛不易】《小王》签名专辑 含独家写真明信片',
+					nprice: '118',
+					oprice: '158',
+					discount: '7.5'
 				},
 				{
 					id: 3,
 					imgUrl: '/static/index/hot/音乐周边/hot3.png',
-					name: '卡马民谣吉他41寸初学者入门木吉他学生男女乐器guitarra',
-					nprice: '599',
-					oprice: '899',
+					name: '【张学友】经典金曲黑胶唱片收藏版 怀旧典藏',
+					nprice: '399',
+					oprice: '599',
 					discount: '6.7'
 				},
 				{
 					id: 4,
 					imgUrl: '/static/index/shop/音乐周边/1.png',
-					name: 'AirPods Pro 2代苹果无线蓝牙耳机主动降噪入耳式耳机',
-					nprice: '1899',
-					oprice: '2399',
-					discount: '7.9'
+					name: '【易烊千玺】首张个人EP《NOTHING TO LOSE》限量版',
+					nprice: '149',
+					oprice: '199',
+					discount: '7.5'
 				}
 			]
 		}

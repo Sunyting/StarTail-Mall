@@ -33,14 +33,14 @@
 			}
 		},
 		{
-			"path": "pages/Search/Search",
+			"path": "pages/Search/search",
 			"style": {
 				"navigationBarTitleText": "搜索",
 				"navigationStyle": "custom"
 			}
 		},
 		{
-			"path": "pages/Search/Search-list",
+			"path": "pages/Search/search-list",
 			"style": {
 				"navigationBarTitleText": "搜索结果",
 				"navigationStyle": "custom"

@@ -8,17 +8,8 @@ const searchValue = ref('');
 
 const handleSearch = () => {
 	uni.navigateTo({
-		url: '/pages/Search/Search'
+		url: '/pages/Search/search'
 	});
-};
-
-// 处理输入框点击事件
-const handleInputFocus = () => {
-	setTimeout(() => {
-		uni.navigateTo({
-			url: '/pages/Search/Search'
-		});
-	}, 100);
 };
 
 // 父传子参数
@@ -120,7 +111,7 @@ onMounted(() => {
 				placeholder="请搜索商品~"
 				@iconClick="handleSearch"
 				@confirm="handleSearch"
-				@focus="handleInputFocus"
+				@focus="handleSearch"
 			></uni-easyinput>
 		</view>
 	</view>

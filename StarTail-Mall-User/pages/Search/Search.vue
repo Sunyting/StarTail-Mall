@@ -1,54 +1,42 @@
 <script setup>
-import { WINDOW_INFO } from '../../utils/config.js';
-import { useNavBarStyle } from '../../utils/system.js';
-import { computed, ref, onMounted } from 'vue';
-import Commodity from '@/components/common/Commodity.vue';
+import { COLOR_PRIMARY, WINDOW_INFO } from '../../utils/config.js';
+import { statusBarH, useNavBarStyle } from '../../utils/system.js';
+import { computed, ref, onMounted, watch } from 'vue';
 import http from '@/utils/api/request.js';
 
 const searchValue = ref('');
 const searchHistory = ref([]);
 const hotSearchList = ref([]);
+const suggestions = ref([]); // 搜索建议列表
+const showSuggestions = ref(false); // 是否显示建议列表
 
 // 热门搜索数据
 const initHotSearch = () => {
 	hotSearchList.value = [
-		{ id: 1, keyword: '崩坏星铁', hot: false },
-		{ id: 2, keyword: '初音未来', hot: false },
-		{ id: 3, keyword: '周生生首饰', hot: true },
-		{ id: 4, keyword: '宠物用品', hot: false },
-		{ id: 5, keyword: '故宫文创', hot: true },
-		{ id: 6, keyword: '搞笑玩具', hot: false }
+		{ id: 0, keyword: '周生生首饰'},
+		{ id: 1, keyword: '宠物用品'},
+		{ id: 2, keyword: '故宫文创'},
+		{ id: 3, keyword: '搞笑玩具'}
 	];
 };
 
+// 加载搜索历史
 const loadSearchHistory = () => {
 	const history = uni.getStorageSync('searchHistory') || [];
-	searchHistory.value = history;
+	searchHistory.value = history.slice(0, 10);
 };
 
+// 保存搜索历史
 const saveSearchHistory = (keyword) => {
 	if (!keyword.trim()) return;
 
 	let history = uni.getStorageSync('searchHistory') || [];
 	history = history.filter((item) => item !== keyword);
 	history.unshift(keyword);
+	history = history.slice(0, 10);
 
 	uni.setStorageSync('searchHistory', history);
 	searchHistory.value = history;
-};
-
-const handleSearch = () => {
-	if (!searchValue.value.trim()) return;
-
-	const keyword = searchValue.value.trim();
-
-	// 保存搜索历史
-	saveSearchHistory(keyword);
-
-	// 跳转到搜索结果页
-	uni.navigateTo({
-		url: `/pages/Search/Search-list?keyword=${encodeURIComponent(keyword)}`
-	});
 };
 
 // 点击热门搜索
@@ -106,9 +94,13 @@ const screenTop = computed(() => {
 const showBack = ref(false);
 const navBack = () => {
 	const pages = getCurrentPages();
-	uni.switchTab({
-		url: '/pages/index/index'
-	});
+	if (pages.length > 1) {
+		uni.navigateBack();
+	} else {
+		uni.switchTab({
+			url: '/pages/index/index'
+		});
+	}
 };
 
 onMounted(() => {
@@ -118,6 +110,75 @@ onMounted(() => {
 	initHotSearch();
 	loadSearchHistory();
 });
+
+// 监听搜索框输入，获取搜索建议
+watch(searchValue, (newVal) => {
+	if (newVal.trim().length > 0) {
+		// 输入长度大于0时，获取建议
+		getSuggestions(newVal);
+		showSuggestions.value = true;
+	} else {
+		// 输入为空时，清空建议并隐藏
+		suggestions.value = [];
+		showSuggestions.value = false;
+	}
+});
+
+const getSuggestions = (keyword) => {
+	const mockSuggestions = [
+		{ id: 1, keyword: '鸣潮手办 守岸人', type: 'product' },
+		{ id: 2, keyword: '鸣潮手办 漂泊者', type: 'product' },
+		{ id: 3, keyword: '原神手办 胡桃', type: 'product' },
+		{ id: 4, keyword: '原神周边 甘雨', type: 'product' },
+		{ id: 5, keyword: '崩坏星铁 砂金', type: 'product' },
+		{ id: 6, keyword: '崩坏星铁 戒指', type: 'product' },
+		{ id: 7, keyword: '初音未来 亚克力立牌', type: 'product' },
+		{ id: 8, keyword: '初音未来 手办', type: 'product' }
+	];
+
+	suggestions.value = mockSuggestions.filter((item) => item.keyword.includes(keyword)).slice(0, 8); // 最多显示8条
+};
+
+// 点击建议项
+const clickSuggestion = (keyword) => {
+	searchValue.value = keyword;
+	showSuggestions.value = false;
+
+	// 保存搜索历史
+	saveSearchHistory(keyword);
+
+	// 跳转到搜索结果页
+	uni.navigateTo({
+		url: `/pages/Search/search-list?keyword=${encodeURIComponent(keyword)}`
+	});
+};
+
+// 输入框聚焦
+const onFocus = () => {
+	if (searchValue.value.trim().length > 0) {
+		showSuggestions.value = true;
+	}
+};
+
+// 输入框失去焦点（延迟隐藏，以便点击建议项）
+const onBlur = () => {
+	setTimeout(() => {
+		showSuggestions.value = false;
+	}, 200);
+};
+
+// 修改原有的 handleSearch，跳转时隐藏建议
+const handleSearch = () => {
+	if (!searchValue.value.trim()) return;
+
+	const keyword = searchValue.value.trim();
+	saveSearchHistory(keyword);
+	showSuggestions.value = false;
+
+	uni.navigateTo({
+		url: `/pages/Search/search-list?keyword=${encodeURIComponent(keyword)}`
+	});
+};
 </script>
 
 <template>
@@ -141,12 +202,22 @@ onMounted(() => {
 					placeholder="请搜索商品~"
 					@iconClick="handleSearch"
 					@confirm="handleSearch"
+					@focus="onFocus"
+					@blur="onBlur"
 				></uni-easyinput>
 			</view>
+			<view v-if="showSuggestions && suggestions.length > 0" class="suggestions-container">
+				<view v-for="item in suggestions" :key="item.id" class="suggestion-item" @click="clickSuggestion(item.keyword)">
+					<uni-icons type="search" size="16" color="#999"></uni-icons>
+					<text class="suggestion-text">{{ item.keyword }}</text>
+				</view>
+			</view>
 		</view>
-
+		
+		<view class="header-placeholder"></view>
+		
 		<!-- 内容区域：只显示搜索历史和热门搜索 -->
-		<view class="content-area" :style="{ marginTop: '240rpx' }">
+		<view class="content-area" :style="{ marginTop: '215rpx' }">
 			<!-- 搜索历史 -->
 			<view v-if="searchHistory.length > 0" class="search-section">
 				<view class="section-header">
@@ -157,7 +228,7 @@ onMounted(() => {
 					<view v-for="(item, index) in searchHistory" :key="index" class="history-item" @click="clickHistorySearch(item)">
 						<uni-icons type="clock" size="16" color="#999"></uni-icons>
 						<text class="history-text">{{ item }}</text>
-						<uni-icons type="clear" size="14" color="#ccc" @click.stop="deleteHistoryItem(index)"></uni-icons>
+						<uni-icons type="clear" size="16" color="#ccc" @click.stop="deleteHistoryItem(index)"></uni-icons>
 					</view>
 				</view>
 			</view>
@@ -168,7 +239,7 @@ onMounted(() => {
 					<text class="section-title">热门搜索</text>
 				</view>
 				<view class="hot-search-list">
-					<view v-for="item in hotSearchList" :key="item.id" class="hot-search-item" :class="{ hot: item.hot }" @click="clickHotSearch(item.keyword)">
+					<view v-for="item in hotSearchList" :key="item.id" class="hot-search-item"" @click="clickHotSearch(item.keyword)">
 						<text class="hot-search-text">{{ item.keyword }}</text>
 					</view>
 				</view>
@@ -214,7 +285,7 @@ onMounted(() => {
 					content: '';
 					width: 100%;
 					height: 100%;
-					background-color: rgba(0, 0, 0, 0.1);
+					background-color: rgba(239, 161, 156, 0.3);
 					z-index: -1;
 					backdrop-filter: blur(10rpx);
 				}
@@ -244,33 +315,76 @@ onMounted(() => {
 					flex-shrink: 0;
 				}
 			}
-		}
-	}
-
-	.fixed-search {
-		position: fixed;
-		top: 135rpx;
-		left: 0;
-		width: 100%;
-		padding: 0 20rpx;
-		box-sizing: border-box;
-
-		.search {
+		}	
+		.fixed-search {
+			position: fixed;
+			left: 0;
 			width: 100%;
+			padding: 0 20rpx;
+			box-sizing: border-box;
 
-			:deep(.is-input-border) {
-				border-radius: 50px;
-				border-color: black !important;
+			.search {
+				width: 100%;
+
+				:deep(.is-input-border) {
+					border-radius: 50px;
+					border-color: black !important;
+				}
+			}
+			// 搜索建议列表
+			.suggestions-container {
+				position: fixed;
+				top: 380rpx; // 根据你的导航栏高度调整
+				left: 0;
+				right: 0;
+				background-color: #fff;
+				border-radius: 16rpx;
+				margin: 0 20rpx;
+				padding: 20rpx 0;
+				max-height: 600rpx;
+				overflow-y: auto;
+				box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+				z-index: 100;
+
+				.suggestion-item {
+					display: flex;
+					align-items: center;
+					padding: 24rpx 30rpx;
+					border-bottom: 1rpx solid #f5f5f5;
+
+					&:last-child {
+						border-bottom: none;
+					}
+
+					&:active {
+						background-color: #f9f9f9;
+					}
+
+					.suggestion-text {
+						margin-left: 20rpx;
+						font-size: 28rpx;
+						color: #333;
+						flex: 1;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+				}
 			}
 		}
 	}
 
-	.content-area {
-	.content-area {
+
+
+	.header-placeholder {
 		width: 100%;
-		min-height: calc(100vh - 240rpx);
-		min-height: calc(100vh - 240rpx);
-		padding: 20rpx;
+		height: 1rpx;
+	}
+
+	.content-area {
+		height: calc(100vh - 215rpx);
+		width: 100%;
+		padding: 20rpx 20rpx 0 20rpx;
 		box-sizing: border-box;
 		background-color: #f5f5f5;
 
@@ -306,23 +420,23 @@ onMounted(() => {
 
 			// 搜索历史列表
 			.history-list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 20rpx;
 				.history-item {
+					position: relative;
+					padding: 16rpx 28rpx;
+					background-color: #f5f5f5;
+					border-radius: 40rpx;
+					transition: all 0.3s;
 					display: flex;
-					align-items: center;
-					padding: 20rpx 0;
-					border-bottom: 1rpx solid #f0f0f0;
-
-					&:last-child {
-						border-bottom: none;
-					}
-
+					gap: 10rpx;
+					
 					&:active {
-						background-color: #f9f9f9;
+						background-color: #e0e0e0;
 					}
-
-					.history-text {
-						flex: 1;
-						margin-left: 16rpx;
+					
+					.hot-search-text {
 						font-size: 28rpx;
 						color: #666;
 					}
@@ -346,35 +460,9 @@ onMounted(() => {
 						background-color: #e0e0e0;
 					}
 
-					&.hot {
-						background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
-
-						.hot-search-text {
-							color: #ff4444;
-							font-weight: 500;
-						}
-					}
-
 					.hot-search-text {
 						font-size: 28rpx;
 						color: #666;
-					}
-
-					.hot-tag {
-						position: absolute;
-						top: -8rpx;
-						right: -8rpx;
-						width: 32rpx;
-						height: 32rpx;
-						background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
-						color: #fff;
-						font-size: 20rpx;
-						font-weight: bold;
-						border-radius: 50%;
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						box-shadow: 0 2rpx 8rpx rgba(255, 68, 68, 0.3);
 					}
 				}
 			}
