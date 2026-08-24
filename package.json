@@ -1,4 +1,15 @@
 {
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix StarTail-Mall-Admin run dev",
+    "dev:admin": "npm --prefix StarTail-Mall-Admin run dev",
+    "dev:user:h5": "npm --prefix StarTail-Mall-User run dev:h5",
+    "dev:user:mp-weixin": "npm --prefix StarTail-Mall-User run dev:mp-weixin",
+    "build:admin": "npm --prefix StarTail-Mall-Admin run build",
+    "build:user:h5": "npm --prefix StarTail-Mall-User run build:h5",
+    "build:user:mp-weixin": "npm --prefix StarTail-Mall-User run build:mp-weixin",
+    "dev:user-server": "npm --prefix StarTail-Mall-User/server start"
+  },
   "devDependencies": {
     "prettier": "^3.7.4"
   },
