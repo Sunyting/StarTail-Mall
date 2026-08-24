@@ -38,7 +38,20 @@
             <th>操作</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="loading">
+          <tr>
+            <td class="empty-cell" :colspan="module.columns.length + 1">正在加载数据...</td>
+          </tr>
+        </tbody>
+        <tbody v-else-if="errorMessage">
+          <tr>
+            <td class="empty-cell" :colspan="module.columns.length + 1">
+              <p>{{ errorMessage }}</p>
+              <button type="button" class="text-button" @click="$emit('retry')">重新加载</button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody v-else>
           <tr v-for="row in filteredRows" :key="row.id">
             <td v-for="column in module.columns" :key="column.key">
               <span v-if="column.key === 'status'" class="status-badge" :class="row.status">
@@ -76,8 +89,16 @@ defineProps({
   filteredRows: {
     type: Array,
     required: true
+  },
+  loading: {
+    type: Boolean,
+    default: false
+  },
+  errorMessage: {
+    type: String,
+    default: ''
   }
 })
 
-defineEmits(['update:query', 'update:status', 'select-row'])
+defineEmits(['update:query', 'update:status', 'select-row', 'retry'])
 </script>
