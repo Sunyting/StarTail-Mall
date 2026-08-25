@@ -1,6 +1,7 @@
 export default {
 	common: {
 		baseUrl: "http://localhost:3001/api",
+		assetBaseUrl: "http://localhost:3001",
 		data: {},
 		header: {
 			"Content-Type": "application/json"
@@ -26,8 +27,19 @@ export default {
 					setTimeout(function() {
 						uni.hideLoading();
 					}, 1000)
-					let data = result.data;
-					resolve(data);
+					const normalizeAssetUrl = (value) => {
+						if (typeof value === 'string') {
+							return value.startsWith('/static/') ? this.common.assetBaseUrl + value : value;
+						}
+						if (Array.isArray(value)) {
+							return value.map(normalizeAssetUrl);
+						}
+						if (value && typeof value === 'object') {
+							return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, normalizeAssetUrl(item)]));
+						}
+						return value;
+					};
+					resolve(normalizeAssetUrl(result.data));
 				},
 				fail: (error) => {
 					reject(error);

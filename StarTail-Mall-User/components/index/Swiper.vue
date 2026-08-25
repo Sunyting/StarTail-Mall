@@ -1,13 +1,17 @@
 <script setup>
 import { ref } from 'vue';
 import { onLoad, onShow } from '@dcloudio/uni-app';
+import http from '@/utils/api/request.js';
 
 let swiperData = ref();
 const init = () => {
 	uni.request({
 		url: 'http://localhost:3001/api/index_list/recommend',
 		success: (res) => {
-			swiperData.value = res.data.data.swiperData.List;
+			swiperData.value = res.data.data.swiperData.List.map((item) => ({
+				...item,
+				imgUrl: item.imgUrl.startsWith('/static/') ? http.common.assetBaseUrl + item.imgUrl : item.imgUrl
+			}));
 		}
 	});
 };

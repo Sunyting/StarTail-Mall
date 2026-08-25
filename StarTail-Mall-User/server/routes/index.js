@@ -1109,31 +1109,31 @@ router.get('/api/index_list/music', function(req, res, next) {
 	res.send({
 		"code": 0,
 		"data": {
-			bannerImgUrl: '/static/index/banner/音乐唱片.png',
+			bannerImgUrl: '/static/index/banner/音乐周边.png',
 			iconList: [{
 					id: 0,
 					title: '流行唱片',
-					imgUrl: '/static/index/icon/音乐周边/电子唱片.png'
+					imgUrl: '/static/index/icon/音乐周边/1.png'
 				},
 				{
 					id: 1,
 					title: '经典唱片',
-					imgUrl: '/static/index/icon/音乐周边/实体唱片.png'
+					imgUrl: '/static/index/icon/音乐周边/2.png'
 				},
 				{
 					id: 2,
 					title: '限量版',
-					imgUrl: '/static/index/icon/音乐周边/车载歌单.png'
+					imgUrl: '/static/index/icon/音乐周边/3.png'
 				},
 				{
 					id: 3,
 					title: '明星签名',
-					imgUrl: '/static/index/icon/音乐周边/耳机.png'
+					imgUrl: '/static/index/icon/音乐周边/4.png'
 				},
 				{
 					id: 4,
 					title: '明星写真',
-					imgUrl: '/static/index/icon/音乐周边/话筒.png'
+					imgUrl: '/static/index/icon/音乐周边/5.png'
 				},
 				{
 					id: 5,
