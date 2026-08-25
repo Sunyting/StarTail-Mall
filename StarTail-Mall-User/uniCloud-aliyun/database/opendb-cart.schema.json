@@ -1,0 +1,15 @@
+{
+	"bsonType": "object",
+	"description": "用户购物车。用户身份由 cart-manage 云函数的可信 OPENID 绑定，客户端无直连读写权限。",
+	"required": ["productId", "quantity", "selected", "userId", "createdAt", "updatedAt"],
+	"permission": { "read": false, "create": false, "update": false, "delete": false },
+	"properties": {
+		"_id": { "description": "购物车项 ID" },
+		"productId": { "bsonType": "string", "description": "关联的商品 ID" },
+		"quantity": { "bsonType": "int", "minimum": 1, "maximum": 99, "description": "商品数量" },
+		"selected": { "bsonType": "bool", "description": "是否参与结算" },
+		"userId": { "bsonType": "string", "description": "云函数从可信上下文写入的 OPENID" },
+		"createdAt": { "bsonType": "double", "description": "创建时间戳（毫秒）" },
+		"updatedAt": { "bsonType": "double", "description": "更新时间戳（毫秒）" }
+	}
+}

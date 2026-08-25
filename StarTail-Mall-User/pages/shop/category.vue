@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { categories, products } from './category.data.js'
+import { addCartItem } from '../../services/cart.js'
 import { fetchProducts } from '../../services/product.js'
 
 const activeCategory = ref(categories[0].key)
@@ -22,7 +23,7 @@ function selectCategory(key) {
 	activeCategory.value = key
 }
 
-function addToCart(product) {
+async function addToCart(product) {
 	const cart = uni.getStorageSync('startail-cart') || []
 	const existing = cart.find((item) => item.id === product.id)
 
@@ -33,6 +34,14 @@ function addToCart(product) {
 	}
 
 	uni.setStorageSync('startail-cart', cart)
+
+	try {
+		const cloudCart = await addCartItem(product.id)
+		uni.setStorageSync('startail-cart', cloudCart)
+	} catch {
+		// 云函数尚未部署或网络不可用时，继续使用本地购物车。
+	}
+
 	uni.showToast({ title: '已加入购物车', icon: 'success' })
 }
 

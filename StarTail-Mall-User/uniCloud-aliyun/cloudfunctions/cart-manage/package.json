@@ -1,0 +1,7 @@
+{
+	"name": "cart-manage",
+	"version": "1.0.0",
+	"description": "星轨商城购物车云函数",
+	"main": "index.js",
+	"cloudfunction-config": { "memorySize": 128, "timeout": 10 }
+}

@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
+import { deleteCartItem, fetchCart, updateCartItem } from '../../services/cart.js'
 
 const cartItems = ref([])
 
@@ -9,30 +10,61 @@ const selectedCount = computed(() => selectedItems.value.reduce((total, item) =>
 const totalPrice = computed(() => selectedItems.value.reduce((total, item) => total + item.price * item.quantity, 0))
 const allSelected = computed(() => cartItems.value.length > 0 && cartItems.value.every((item) => item.selected))
 
-function loadCart() {
+async function loadCart() {
 	cartItems.value = uni.getStorageSync('startail-cart') || []
+
+	try {
+		cartItems.value = await fetchCart()
+		saveCart()
+	} catch {
+		// 云函数尚未部署或网络不可用时，使用本地购物车。
+	}
 }
 
 function saveCart() {
 	uni.setStorageSync('startail-cart', cartItems.value)
 }
 
-function toggleAll() {
+async function syncItem(item, updates) {
+	try {
+		cartItems.value = await updateCartItem(item.id, updates)
+		saveCart()
+	} catch {
+		saveCart()
+	}
+}
+
+async function toggleAll() {
 	const nextValue = !allSelected.value
 	cartItems.value.forEach((item) => {
 		item.selected = nextValue
 	})
 	saveCart()
+
+	await Promise.all(cartItems.value.map((item) => syncItem(item, { selected: nextValue })))
 }
 
 function changeQuantity(item, delta) {
-	item.quantity = Math.max(1, item.quantity + delta)
-	saveCart()
+	const quantity = Math.max(1, item.quantity + delta)
+	item.quantity = quantity
+	syncItem(item, { quantity })
 }
 
-function removeItem(id) {
+function toggleItem(item) {
+	item.selected = !item.selected
+	syncItem(item, { selected: item.selected })
+}
+
+async function removeItem(id) {
 	cartItems.value = cartItems.value.filter((item) => item.id !== id)
 	saveCart()
+
+	try {
+		cartItems.value = await deleteCartItem(id)
+		saveCart()
+	} catch {
+		// 本地删除已经完成，待云端可用后重新同步。
+	}
 }
 
 function checkout() {
@@ -66,7 +98,7 @@ onShow(loadCart)
 		<view v-else class="cart-content">
 			<view class="cart-list">
 				<view v-for="item in cartItems" :key="item.id" class="cart-item">
-					<view class="select-control" :class="{ selected: item.selected }" @tap="item.selected = !item.selected; saveCart()">
+					<view class="select-control" :class="{ selected: item.selected }" @tap="toggleItem(item)">
 						<uni-icons v-if="item.selected" type="checkmarkempty" size="15" color="#ffffff"></uni-icons>
 					</view>
 					<image class="item-image" :src="item.image" mode="aspectFill"></image>

@@ -1,0 +1,6 @@
+{
+	"indexes": [
+		{ "name": "user_updated_at", "keys": [{"userId": 1}, {"updatedAt": -1}], "unique": false },
+		{ "name": "user_product", "keys": [{"userId": 1}, {"productId": 1}], "unique": true }
+	]
+}
