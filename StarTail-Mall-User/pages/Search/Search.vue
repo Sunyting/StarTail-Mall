@@ -239,7 +239,7 @@ const handleSearch = () => {
 					<text class="section-title">热门搜索</text>
 				</view>
 				<view class="hot-search-list">
-					<view v-for="item in hotSearchList" :key="item.id" class="hot-search-item"" @click="clickHotSearch(item.keyword)">
+					<view v-for="item in hotSearchList" :key="item.id" class="hot-search-item" @click="clickHotSearch(item.keyword)">
 						<text class="hot-search-text">{{ item.keyword }}</text>
 					</view>
 				</view>
