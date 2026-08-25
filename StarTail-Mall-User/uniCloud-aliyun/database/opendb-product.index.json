@@ -1,0 +1,13 @@
+{
+	"indexes": [
+		{
+			"name": "status_category_sort",
+			"keys": [
+				{"status": 1},
+				{"category": 1},
+				{"sort": 1}
+			],
+			"unique": false
+		}
+	]
+}

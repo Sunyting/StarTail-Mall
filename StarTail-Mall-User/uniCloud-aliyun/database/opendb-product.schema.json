@@ -1,0 +1,50 @@
+{
+	"bsonType": "object",
+	"description": "商城商品主数据。仅云函数及受控后台可写，小程序通过 product-list 云函数读取在售商品。",
+	"required": ["category", "image", "name", "price", "status", "stock", "sort"],
+	"permission": {
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "商品 ID"
+		},
+		"category": {
+			"bsonType": "string",
+			"description": "商品分类标识",
+			"enum": ["jewelry", "animation", "game", "art"]
+		},
+		"image": {
+			"bsonType": "string",
+			"description": "商品图片路径或云存储地址"
+		},
+		"name": {
+			"bsonType": "string",
+			"description": "商品名称"
+		},
+		"originalPrice": {
+			"bsonType": "double",
+			"description": "划线原价，单位为元"
+		},
+		"price": {
+			"bsonType": "double",
+			"description": "当前销售价，单位为元"
+		},
+		"sort": {
+			"bsonType": "int",
+			"description": "分类内升序排序值"
+		},
+		"status": {
+			"bsonType": "string",
+			"description": "销售状态",
+			"enum": ["on-sale", "off-sale"]
+		},
+		"stock": {
+			"bsonType": "int",
+			"description": "可售库存，订单创建时必须由云函数重新校验"
+		}
+	}
+}

@@ -1,17 +1,20 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { categories, products } from './category.data.js'
+import { fetchProducts } from '../../services/product.js'
 
 const activeCategory = ref(categories[0].key)
 const loading = ref(false)
 const errorMessage = ref('')
+const cloudProducts = ref([])
 
 const activeCategoryLabel = computed(() => {
 	return categories.find((item) => item.key === activeCategory.value)?.label || ''
 })
 
 const visibleProducts = computed(() => {
-	return products.filter((item) => item.category === activeCategory.value)
+	const source = cloudProducts.value.length ? cloudProducts.value : products
+	return source.filter((item) => item.category === activeCategory.value)
 })
 
 function selectCategory(key) {
@@ -33,13 +36,21 @@ function addToCart(product) {
 	uni.showToast({ title: '已加入购物车', icon: 'success' })
 }
 
-function retry() {
+async function loadProducts() {
 	loading.value = true
 	errorMessage.value = ''
-	setTimeout(() => {
+
+	try {
+		cloudProducts.value = await fetchProducts()
+	} catch (error) {
+		cloudProducts.value = []
+		errorMessage.value = error instanceof Error ? error.message : '云端商品加载失败，请稍后重试。'
+	} finally {
 		loading.value = false
-	}, 180)
+	}
 }
+
+onMounted(loadProducts)
 </script>
 
 <template>
@@ -70,9 +81,9 @@ function retry() {
 				</view>
 
 				<view v-if="loading" class="feedback">正在加载商品...</view>
-				<view v-else-if="errorMessage" class="feedback">
+				<view v-else-if="errorMessage && !visibleProducts.length" class="feedback">
 					<text>{{ errorMessage }}</text>
-					<button class="retry-button" type="button" @tap="retry">重新加载</button>
+					<button class="retry-button" type="button" @tap="loadProducts">重新加载</button>
 				</view>
 				<view v-else-if="!visibleProducts.length" class="feedback">暂无商品</view>
 				<view v-else class="product-grid">

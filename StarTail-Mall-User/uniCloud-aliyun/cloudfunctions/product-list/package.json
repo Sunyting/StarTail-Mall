@@ -1,0 +1,10 @@
+{
+	"name": "product-list",
+	"version": "1.0.0",
+	"description": "星轨商城商品查询云函数",
+	"main": "index.js",
+	"cloudfunction-config": {
+		"memorySize": 128,
+		"timeout": 10
+	}
+}
