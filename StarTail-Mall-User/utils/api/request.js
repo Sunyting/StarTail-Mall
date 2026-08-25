@@ -1,7 +1,13 @@
+let assetBaseUrl = '';
+
+// #ifdef H5
+assetBaseUrl = 'http://localhost:3001';
+// #endif
+
 export default {
 	common: {
 		baseUrl: "http://localhost:3001/api",
-		assetBaseUrl: "http://localhost:3001",
+		assetBaseUrl,
 		data: {},
 		header: {
 			"Content-Type": "application/json"
