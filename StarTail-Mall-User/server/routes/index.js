@@ -949,7 +949,7 @@ router.get('/api/index_list/joke', function(req, res, next) {
 	res.send({
 		"code": 0,
 		"data": {
-			bannerImgUrl: '/static/index/banner/生活调剂.png',
+			bannerImgUrl: '/static/index/hot/生活调剂/hot1.png',
 			iconList: [{
 					id: 0,
 					title: '搞笑',
