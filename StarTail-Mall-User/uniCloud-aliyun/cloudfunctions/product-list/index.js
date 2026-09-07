@@ -1,7 +1,7 @@
 'use strict'
 
 const db = uniCloud.database()
-const products = db.collection('opendb-product')
+const products = db.collection('startail-product')
 
 exports.main = async (event = {}) => {
 	const category = typeof event.category === 'string' ? event.category.trim() : ''

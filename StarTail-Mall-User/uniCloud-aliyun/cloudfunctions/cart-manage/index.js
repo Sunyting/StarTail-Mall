@@ -2,8 +2,8 @@
 
 const db = uniCloud.database()
 const command = db.command
-const carts = db.collection('opendb-cart')
-const products = db.collection('opendb-product')
+const carts = db.collection('startail-cart')
+const products = db.collection('startail-product')
 
 function getOpenId(context) {
 	if (!context.OPENID) throw new Error('请在微信小程序中登录后使用购物车。')
